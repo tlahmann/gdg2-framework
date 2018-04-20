@@ -3,12 +3,9 @@ package de.uulm.mi.gdg;
 import de.looksgood.ani.Ani;
 import de.uulm.mi.gdg.utils.*;
 import processing.core.PApplet;
-import processing.data.JSONArray;
-import processing.data.JSONObject;
-import processing.data.StringList;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GdGMain extends PApplet {
     private static GUI gui;
@@ -16,13 +13,10 @@ public class GdGMain extends PApplet {
     private ArrayList<CustomAnimation> anis;
     private CustomAnimation ani;
 
-    //    BufferedReader reader;
     private AniExporter ae;
-//    private Thread aet;
 
     private float background = 255;
-
-    private boolean exporting = false;
+    private float fill = 0;
 
     public void settings() {
         setSize(1240, 720);
@@ -30,49 +24,43 @@ public class GdGMain extends PApplet {
 
     @Override
     public void setup() {
-        // Produce the video as fast as possible
+        // Do not change the frame rate configuration
         frameRate(60);
-
-        // Read a sound file and output a txt file
-        // with the FFT analysis.
-        // It uses Minim, because the standard
-        // Sound library did not work in my system.
 
         Player p = new Player(this, "./data/Syntask - The Best of LMMS Vol.1 - 01 Galaksy.mp3");
         gui = new GUI(this, p);
         ae = new AniExporter(this, "Syntask - The Best of LMMS Vol.1 - 01 Galaksy.mp3", "GdG-export.mp4");
-//        aet = new Thread(ae);
-//        aet.start();
 
         Ani.init(this);
 
         startAnimation();
     }
 
-    float movieFPS = 5;
-    float frameDuration = (1 / movieFPS) * 1000;
-    float lastFrame = System.currentTimeMillis();
+    float fps = frameRate;
+    float smoothing = 0.95f;
 
     @Override
     public void draw() {
-//        if (ae.isExporting()) return;
-
         background(background);
         stroke(140, 69, 24);
-        HUD_text(new String[]{"Gdg2", frameRate + "", frameCount + ""});
-        fill(123, 23, 200);
+        fill(fill);
         rect(this.width * 0.12f, this.height * 0.33f, 300, 400);
         ellipse(900, 300, 100, 200);
         triangle(300, 450, 650, 20, 1000, 450);
         update(gui.getAudioPlayer().getSong().position());
         display();
+
+        if (!gui.getAudioPlayer().isPlaying()) {
+            int now = gui.getAudioPlayer().getSong().position();
+            int sec = now / 1000;
+            int ms = now % 1000;
+            fps = (fps * smoothing) + (frameRate * (1.0f - smoothing));
+            String f = String.format("%.1f", fps);
+            HUD_text(new String[]{"Gdg2",
+                    f + " f/s",
+                    sec + ":" + ms});
+        }
         ae.setSoundTime(gui.getAudioPlayer().getSong().position());
-//        System.out.println(gui.getAudioPlayer().getSong().position());
-        /*if (System.currentTimeMillis() > lastFrame + frameDuration) {
-            ae.soundTime = gui.getAudioPlayer().getSong().position();
-//            ae.startExporting();
-            lastFrame = System.currentTimeMillis();
-        }*/
     }
 
     /**
@@ -93,6 +81,8 @@ public class GdGMain extends PApplet {
      */
     private void startAnimation() {
         anis = AniImporter.importAnimation(this, "./data/timing/timing.json", "background");
+        anis.addAll(AniImporter.importAnimation(this, "./data/timing/timing.json", "fill"));
+        Collections.sort(anis);
     }
 
     /**
