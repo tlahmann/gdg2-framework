@@ -7,7 +7,12 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import de.uulm.mi.gdg.utils.GdGConstants.AnimationStates;
+
+import static de.uulm.mi.gdg.utils.GdGConstants.AnimationStates.*;
+
 public class GdGMain extends PApplet {
+    private static AnimationStates state = MENU;
     public static PApplet canvas;
     private static GUI gui;
     private static Player player;
@@ -120,14 +125,26 @@ public class GdGMain extends PApplet {
     }
 
     public void keyPressed() {
-        if (key == 'e' || key == 'E') {
-            if (ae.isRunning()) {
-                ae.endExporting();
-            } else {
-                ae.startExporting();
-                playPause(0);
-            }
+        switch (Character.toLowerCase(key)) {
+            case ' ':
+            case ENTER:
+                // Switch between running and paused state when pressing space
+                state = state == RUNNING ? PAUSED : RUNNING;
+                break;
+            case 'e':
+                System.out.println("E pressed");
+                /*if (ae.isRunning()) {
+                    ae.endExporting();
+                } else {
+                    ae.startExporting();
+                    playPause(0);
+                }*/
+                break;
+            default:
+                // Do nothing
+                break;
         }
+        super.keyPressed();
     }
 
     public void playPause(int value) {

@@ -15,7 +15,6 @@ class InterfaceBuilder {
     }
 
     void createButton(ControlP5 cp5, String text, String color, int xPosition, int yPosition, String methodName) {
-        System.out.println(text + " is " + getWidth(text) + " pixels wide");
         cp5.addButton(text)
                 .setPosition(xPosition, yPosition)
                 .setSize(getWidth(text), 36)
@@ -34,13 +33,12 @@ class InterfaceBuilder {
     }
 
     void createSlider(ControlP5 cp5, String text, String color, int xPosition, int yPosition, String methodName) {
-        System.out.println(text + " is " + getWidth(text) + " pixels wide");
         cp5.addSlider(text)
                 .setPosition(xPosition, yPosition)
                 .setSize(getWidth(text), 36)
                 .setFont(font)
                 .setColor(determineColor(color))
-                .setRange( 0,100) // values can range from big to small as well
+                .setRange(0, 100) // values can range from big to small as well
                 .setValue(50);
 //                .setSliderMode(Slider.FLEXIBLE);
     }
