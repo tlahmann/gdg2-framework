@@ -15,7 +15,7 @@ public class GUI {
         cp5 = new ControlP5(canvas);
         ib.createButton(cp5,
                 "Play",
-                "red",
+                "light green",
                 canvas.width / 2 - 100,
                 canvas.height / 2 + 90,
                 "playPause");
@@ -46,10 +46,16 @@ public class GUI {
                 "randomColor");
         ib.createSlider(cp5,
                 "SomeSlider",
-                "red",
+                "orange",
                 canvas.width / 2 - 400,
                 canvas.height / 2 - 250,
                 "240");
+        ib.createToggle(cp5,
+                "Debug Mode",
+                "deep orange",
+                canvas.width - 175,
+                canvas.height - 120,
+                "toggleSomething");
     }
 
     public void hide() {

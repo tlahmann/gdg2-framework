@@ -17,7 +17,7 @@ import static de.uulm.mi.gdg.utils.GdGConstants.ExportStates.*;
 public class GdGMain extends PApplet {
     private static AnimationStates state = MENU;
     private static ExportStates exportState = NOT_EXPORTING;
-    public static DevelopmentStates devState = DEBUG;
+    public static DevelopmentStates devState = DEPLOY;
     public static PApplet canvas;
 
     private static GUI gui;
@@ -156,6 +156,11 @@ public class GdGMain extends PApplet {
         ae.startExporting();
         state = RUNNING;
         exportState = EXPORTING;
+    }
+
+    public void toggleSomething() {
+        devState = devState == DEBUG ? DEPLOY : DEBUG;
+        System.out.println(devState);
     }
 
     public static void main(String[] args) {

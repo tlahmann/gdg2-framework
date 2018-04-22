@@ -40,7 +40,16 @@ class InterfaceBuilder {
                 .setColor(determineColor(color))
                 .setRange(0, 100) // values can range from big to small as well
                 .setValue(50);
-//                .setSliderMode(Slider.FLEXIBLE);
+    }
+
+    void createToggle(ControlP5 cp5, String text, String color, int xPosition, int yPosition, String methodName) {
+        cp5.addToggle(text)
+                .setPosition(xPosition, yPosition)
+                .setSize(getWidth(text), 36)
+                .setFont(font)
+                .setColor(determineColor(color))
+                .setMode(ControlP5.SWITCH)
+                .plugTo(GdGMain.canvas, methodName);
     }
 
     private int getWidth(String text) {
@@ -186,7 +195,7 @@ class InterfaceBuilder {
                 GdGMain.canvas.color(255, 255, 255));
         CColor DEEP_ORANGE = new CColor(GdGMain.canvas.color(230, 74, 25),
                 GdGMain.canvas.color(255, 87, 34),
-                GdGMain.canvas.color(255, 87, 34),
+                GdGMain.canvas.color(216, 67, 21),
                 GdGMain.canvas.color(0, 0, 0),
                 GdGMain.canvas.color(255, 255, 255));
     }
