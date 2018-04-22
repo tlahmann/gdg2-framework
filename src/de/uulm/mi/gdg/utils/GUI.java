@@ -1,54 +1,55 @@
 package de.uulm.mi.gdg.utils;
 
 import controlP5.ControlP5;
-import de.uulm.mi.gdg.GdGMain;
 import processing.core.PApplet;
 
 public class GUI {
-    private GdGMain m_canvas;
-    private Player audioPlayer;
+    private ControlP5 cp5;
 
-    ControlP5 cp5;
-    int c = 0;
-
-    public GUI(GdGMain canvas, Player audioPlayer) {
-        m_canvas = canvas;
-        this.audioPlayer = audioPlayer;
+    public GUI(PApplet canvas) {
+        InterfaceBuilder ib = new InterfaceBuilder();
 
         cp5 = new ControlP5(canvas);
-
-        cp5.addButton("Play/Pause")
-                .setPosition(canvas.width / 2 - 100, canvas.height / 2 + 100)
-                .setSize(200, 19)
-                .plugTo(this, "playPause");
-
-        cp5.addButton("Start recording")
-                .setPosition(canvas.width / 2 - 100, canvas.height / 2 + 50)
-                .setSize(200, 19)
-                .plugTo(this, "export");
-
-        cp5.addButton("Black/White")
-                .setPosition(canvas.width / 2 - 100, canvas.height / 2 + 130)
-                .setSize(95, 19)
-                .plugTo(this, "blackWhite");
-
-        cp5.addButton("Random Color")
-                .setPosition(canvas.width / 2 + 5, canvas.height / 2 + 130)
-                .setSize(95, 19)
-                .plugTo(this, "randomColor");
+        ib.createButton(cp5,
+                "Play",
+                "red",
+                canvas.width / 2 - 100,
+                canvas.height / 2 + 90,
+                "playPause");
+        ib.createButton(cp5,
+                "BLACK & WHITE",
+                "blue",
+                canvas.width / 2 - 100,
+                canvas.height / 2 + 130,
+                "blackWhite");
+        ib.createButton(cp5,
+                "RANDOM COLOR",
+                "green",
+                canvas.width / 2 - 100,
+                canvas.height / 2 + 170,
+                "randomColor");
+        ib.createButton(cp5,
+                "TEST BUTTON 1",
+                "teal",
+                canvas.width / 2 - 100,
+                canvas.height / 2 + 210,
+                "randomColor");
+        ib.createButton(cp5,
+                "A longer name for a button",
+                "amber",
+                canvas.width / 2 - 100,
+                canvas.height / 2 + 250,
+                240,
+                "randomColor");
+        ib.createSlider(cp5,
+                "SomeSlider",
+                "red",
+                canvas.width / 2 - 400,
+                canvas.height / 2 - 250,
+                "240");
     }
 
-    public void playPause(int value) {
-        audioPlayer.togglePlaying();
+    public void hide() {
         cp5.hide();
-    }
-
-    public void export(int value) {
-        playPause(0);
-//        m_canvas.ae.startExporting();
-    }
-
-    public Player getAudioPlayer() {
-        return audioPlayer;
     }
 }

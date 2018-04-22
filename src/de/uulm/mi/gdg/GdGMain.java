@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class GdGMain extends PApplet {
+    public static PApplet canvas;
     private static GUI gui;
+    private static Player player;
 
     private ArrayList<CustomAnimation> anis;
     private CustomAnimation ani;
@@ -24,12 +26,14 @@ public class GdGMain extends PApplet {
 
     @Override
     public void setup() {
-        // Do not change the frame rate configuration
-        frameRate(60);
+        canvas = this;
 
-        Player p = new Player(this, "./data/Syntask - The Best of LMMS Vol.1 - 01 Galaksy.mp3");
-        gui = new GUI(this, p);
-        ae = new AniExporter(this, "Syntask - The Best of LMMS Vol.1 - 01 Galaksy.mp3", "GdG-export.mp4");
+        // Do not change the frame rate configuration
+        frameRate(30);
+
+        player = new Player(this, "./data/Syntask - The Best of LMMS Vol.1 - 01 Galaksy.mp3");
+        gui = new GUI(this);
+//        ae = new AniExporter(this, "Syntask - The Best of LMMS Vol.1 - 01 Galaksy.mp3", "GdG-export.mp4");
 
         Ani.init(this);
 
@@ -47,11 +51,11 @@ public class GdGMain extends PApplet {
         rect(this.width * 0.12f, this.height * 0.33f, 300, 400);
         ellipse(900, 300, 100, 200);
         triangle(300, 450, 650, 20, 1000, 450);
-        update(gui.getAudioPlayer().getSong().position());
+        update(player.getSong().position());
         display();
 
-        if (!gui.getAudioPlayer().isPlaying()) {
-            int now = gui.getAudioPlayer().getSong().position();
+        if (!player.isPlaying()) {
+            int now = player.getSong().position();
             int sec = now / 1000;
             int ms = now % 1000;
             fps = (fps * smoothing) + (frameRate * (1.0f - smoothing));
@@ -60,7 +64,7 @@ public class GdGMain extends PApplet {
                     f + " f/s",
                     sec + ":" + ms});
         }
-        ae.setSoundTime(gui.getAudioPlayer().getSong().position());
+//        ae.setSoundTime(gui.getAudioPlayer().getSong().position());
     }
 
     /**
@@ -121,9 +125,14 @@ public class GdGMain extends PApplet {
                 ae.endExporting();
             } else {
                 ae.startExporting();
-                gui.playPause(0);
+                playPause(0);
             }
         }
+    }
+
+    public void playPause(int value) {
+        player.togglePlaying();
+        gui.hide();
     }
 
     public static void main(String[] args) {

@@ -115,3 +115,5 @@ ffmpeg*
 *.vob
 *.wmv
 
+## Exercises
+/exercises
