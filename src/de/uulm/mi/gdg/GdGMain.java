@@ -1,6 +1,7 @@
 package de.uulm.mi.gdg;
 
 import de.looksgood.ani.Ani;
+import de.looksgood.ani.AniCore;
 import de.uulm.mi.gdg.utils.*;
 import de.uulm.mi.gdg.utils.GdGConstants.AnimationStates;
 import de.uulm.mi.gdg.utils.GdGConstants.DevelopmentStates;
@@ -23,7 +24,8 @@ public class GdGMain extends PApplet {
     private static GUI gui;
     private static Player player;
 
-    private ArrayList<CustomAnimation> anis;
+    private ArrayList<CustomAnimation> anis = new ArrayList<>();
+    private ArrayList<Ani> activeAnis = new ArrayList<>();
     private CustomAnimation ani;
 
     private AniExporter ae;
@@ -58,10 +60,13 @@ public class GdGMain extends PApplet {
         if (state == RUNNING && !player.song().isPlaying()) {
             player.song().play();
             gui.hide();
+            activeAnis.removeIf(AniCore::isEnded);
+            activeAnis.forEach(AniCore::resume);
         }
         if (state == PAUSED && player.song().isPlaying()) {
             player.song().pause();
             gui.show();
+            activeAnis.forEach(AniCore::pause);
             if (ae != null)
                 ae.endExporting();
         }
@@ -119,6 +124,7 @@ public class GdGMain extends PApplet {
         }
 
         ani = anis.remove(0);
+        activeAnis.removeIf(AniCore::isEnded);
     }
 
     /**
@@ -128,7 +134,7 @@ public class GdGMain extends PApplet {
         if (ani == null) {
             return;
         }
-        Ani.to(this, ani.getDuration(), ani.getParams(), ani.getValue(), ani.getMode());
+        activeAnis.add(Ani.to(this, ani.getDuration(), ani.getParams(), ani.getValue(), ani.getMode()));
         ani = null;
     }
 
