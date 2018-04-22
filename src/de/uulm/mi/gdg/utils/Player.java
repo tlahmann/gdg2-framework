@@ -4,6 +4,7 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.AudioSample;
 import ddf.minim.Minim;
 import ddf.minim.analysis.FFT;
+import de.uulm.mi.gdg.GdGMain;
 import processing.core.PApplet;
 
 /**
@@ -11,14 +12,10 @@ import processing.core.PApplet;
  */
 public class Player {
     private AudioPlayer song;
-    private AudioSample sample;
-    private FFT fft;
 
-    public Player(PApplet _parent, String _file) {
-        Minim minim = new Minim(_parent);
+    public Player(String _file) {
+        Minim minim = new Minim(GdGMain.canvas);
         song = minim.loadFile(_file);
-        sample = minim.loadSample(_file, 2048);
-        fft = new FFT(song.bufferSize(), song.sampleRate());
     }
 
     public void togglePlaying() {
@@ -30,19 +27,7 @@ public class Player {
         }
     }
 
-    public FFT getFFT() {
-        return this.fft;
-    }
-
-    public AudioPlayer getSong() {
+    public AudioPlayer song() {
         return this.song;
-    }
-
-    public AudioSample getSample() {
-        return this.sample;
-    }
-
-    public boolean isPlaying() {
-        return this.song.isPlaying() || this.song.position() > 0;
     }
 }

@@ -37,10 +37,6 @@ public class AniExporter implements Runnable {
         shouldStop = true;
     }
 
-    public boolean isRunning() {
-        return t.isAlive();
-    }
-
     public void setSoundTime(float soundTime) {
         this.soundTime = soundTime;
     }
