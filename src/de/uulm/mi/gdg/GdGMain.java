@@ -153,7 +153,6 @@ public class GdGMain extends PApplet {
     }
 
     public void playPause(int value) {
-        player.song().cue(0);
         state = RUNNING;
     }
 
@@ -167,6 +166,17 @@ public class GdGMain extends PApplet {
     public void toggleSomething() {
         devState = devState == DEBUG ? DEPLOY : DEBUG;
         System.out.println(devState);
+    }
+
+    public void reset() {
+        player.song().cue(0);
+        activeAnis.forEach(AniCore::end);
+        activeAnis.clear();
+        anis.clear();
+
+        background = 255;
+        fill = 0;
+        startAnimation();
     }
 
     public static void main(String[] args) {

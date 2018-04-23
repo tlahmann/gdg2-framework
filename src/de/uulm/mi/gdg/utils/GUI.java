@@ -20,11 +20,11 @@ public class GUI {
                 canvas.height / 2 + 90,
                 "playPause");
         ib.createButton(cp5,
-                "BLACK & WHITE",
+                "Zurücksetzen",
                 "blue",
                 canvas.width / 2 - 100,
                 canvas.height / 2 + 130,
-                "blackWhite");
+                "reset");
         ib.createButton(cp5,
                 "RANDOM COLOR",
                 "green",
