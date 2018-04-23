@@ -37,7 +37,7 @@ public class GUI {
                 .setSize(getWidth("Zurücksetzen"), 36)
                 .setFont(font)
                 .setColor(BLUE_GREY)
-                .plugTo(c, "reset");
+                .plugTo(c, "initialize");
         cp5.addButton("Exit")
                 .setPosition(25, c.height - 73)
                 .setSize(150, 48)

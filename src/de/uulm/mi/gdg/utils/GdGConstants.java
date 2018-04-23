@@ -5,7 +5,7 @@ import de.uulm.mi.gdg.GdGMain;
 
 public class GdGConstants {
     public enum AnimationStates {
-        MENU, RUNNING, PAUSED
+        READY, RUNNING, PAUSED
     }
 
     public enum ExportStates {
