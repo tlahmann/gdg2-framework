@@ -1,15 +1,11 @@
 package de.uulm.mi.gdg.utils;
 
-import ddf.minim.AudioSample;
-import ddf.minim.Minim;
-import ddf.minim.analysis.FFT;
 import de.looksgood.ani.AniConstants;
 import de.looksgood.ani.easing.Easing;
 import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -154,72 +150,5 @@ public abstract class AniImporter {
                 break;
         }
         return e;
-    }
-
-    /**
-     * Minim based audio FFT to data text file conversion.
-     * Non real-time, so you don't wait 5 minutes for a 5 minute song :)
-     * You can look at the produced txt file in the data folder
-     * after running this program to see how it looks like.
-     *
-     * @param importer
-     * @param fileName
-     * @param track
-     * @param seperator
-     */
-    public static void audioToTextFile(PApplet importer, String fileName, AudioSample track, String seperator) {
-        PrintWriter output = importer.createWriter(importer.dataPath(fileName + ".txt"));
-
-        int fftSize = 1024;
-        float sampleRate = track.sampleRate();
-
-        float[] fftSamplesL = new float[fftSize];
-        float[] fftSamplesR = new float[fftSize];
-
-        float[] samplesL = track.getChannel(AudioSample.LEFT);
-        float[] samplesR = track.getChannel(AudioSample.RIGHT);
-
-        FFT fftL = new FFT(fftSize, sampleRate);
-        FFT fftR = new FFT(fftSize, sampleRate);
-
-        fftL.logAverages(22, 3);
-        fftR.logAverages(22, 3);
-
-        int totalChunks = (samplesL.length / fftSize) + 1;
-        int fftSlices = fftL.avgSize();
-
-        for (int ci = 0; ci < totalChunks; ++ci) {
-            int chunkStartIndex = ci * fftSize;
-            int chunkSize = PApplet.min(samplesL.length - chunkStartIndex, fftSize);
-
-            System.arraycopy(samplesL, chunkStartIndex, fftSamplesL, 0, chunkSize);
-            System.arraycopy(samplesR, chunkStartIndex, fftSamplesR, 0, chunkSize);
-            if (chunkSize < fftSize) {
-                java.util.Arrays.fill(fftSamplesL, chunkSize, fftSamplesL.length - 1, 0.0f);
-                java.util.Arrays.fill(fftSamplesR, chunkSize, fftSamplesR.length - 1, 0.0f);
-            }
-
-            fftL.forward(fftSamplesL);
-            fftR.forward(fftSamplesL);
-
-            // The format of the saved txt file.
-            // The file contains many rows. Each row looks like this:
-            // T|L|R|L|R|L|R|... etc
-            // where T is the time in seconds
-            // Then we alternate left and right channel FFT values
-            // The first L and R values in each row are low frequencies (bass)
-            // and they go towards high frequency as we advance towards
-            // the end of the line.
-            StringBuilder msg = new StringBuilder(PApplet.nf(chunkStartIndex / sampleRate, 0, 3).replace(',', '.'));
-            for (int i = 0; i < fftSlices; ++i) {
-                msg.append(seperator + PApplet.nf(fftL.getAvg(i), 0, 4).replace(',', '.'));
-                msg.append(seperator + PApplet.nf(fftR.getAvg(i), 0, 4).replace(',', '.'));
-            }
-            output.println(msg.toString());
-        }
-        track.close();
-        output.flush();
-        output.close();
-        System.out.println("Sound analysis done");
     }
 }
