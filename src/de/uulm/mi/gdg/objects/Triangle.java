@@ -35,8 +35,12 @@ public class Triangle {
 
     private void importAnimation() {
         anis = AniImporter.importAnimation(c, "./data/timing/child.json", "xPos");
+        anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "yPos"));
         anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "rotation"));
         Collections.sort(anis);
+        for (CustomAnimation c : anis) {
+            System.out.println(c);
+        }
     }
 
     /**
@@ -55,14 +59,11 @@ public class Triangle {
         if (time / 1000 < a.getStart()) {
             return;
         }
-        if (time / 1000 > a.getStart() + a.getDuration() + 0.5) {
-            anis.remove(0);
-            return;
-        }
 
         // Get a new animation
         CustomAnimation ani = anis.remove(0);
         activeAnis.add(Ani.to(this, ani.getDuration(), ani.getParams(), ani.getValue(), ani.getMode()));
+        update(time);
 
         // Delete old and finished animations
         activeAnis.removeIf(AniCore::isEnded);
@@ -72,9 +73,9 @@ public class Triangle {
      * Displays the shape on the stored static canvas object.
      */
     public void display() {
-        System.out.println(rotation);
+//        System.out.println("Child is at pos: " + xPos + " :: " + yPos);
         c.pushMatrix();
-        c.translate(xPos, yPos);
+        c.translate(c.width * xPos, c.height * yPos);
         c.rotate(rotation);
         c.shape(shape);
         c.popMatrix();

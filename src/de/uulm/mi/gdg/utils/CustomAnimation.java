@@ -90,6 +90,11 @@ public class CustomAnimation implements Comparable<CustomAnimation> {
      */
     @Override
     public int compareTo(CustomAnimation other) {
-        return (int) (this.start - other.start);
+        return ((this.start - other.start) < 0) ? -1 : 1;
+    }
+
+    @Override
+    public String toString() {
+        return this.params + ": " + this.start + " for " + this.duration + "s --> " + this.value;
     }
 }

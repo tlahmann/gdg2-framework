@@ -1,16 +1,27 @@
 {
 "xPos": [
-  {"start": 0.345, "duration": 0.293, "value": 10, "easing": "sine_out"},
-  {"start": 0.643, "duration": 0.220, "value": 110, "easing": "sine_out"},
-  {"start": 0.868, "duration": 0.209, "value": 280, "easing": "sine_out"},
-  {"start": 1.072, "duration": 0.235, "value": 390, "easing": "sine_out"},
-  {"start": 1.297, "duration": 0.214, "value": 470, "easing": "sine_out"},
-  {"start": 1.501, "duration": 0.225, "value": 520, "easing": "sine_out"},
-  {"start": 1.720, "duration": 0.408, "value": 580, "easing": "sine_out"},
-  {"start": 2.133, "duration": 0.528, "value": 610, "easing": "sine_out"},
-  {"start": 2.656, "duration": 0.387, "value": 620, "easing": "sine_out"},
+  {"start": 0.345, "duration": 0.293, "value": 0.1, "easing": "sine_in_out"},
+  {"start": 0.643, "duration": 0.220, "value": 0.2, "easing": "sine_in_out"},
+  {"start": 0.868, "duration": 0.209, "value": 0.1, "easing": "sine_in_out"},
+  {"start": 1.072, "duration": 0.235, "value": 0.2, "easing": "sine_in_out"},
+  {"start": 1.297, "duration": 0.214, "value": 0.1, "easing": "sine_in_out"},
+  {"start": 1.501, "duration": 0.225, "value": 0.2, "easing": "sine_in_out"},
+  {"start": 1.720, "duration": 0.408, "value": 0.3, "easing": "sine_in_out"},
+  {"start": 2.133, "duration": 0.528, "value": 0.4, "easing": "sine_in_out"},
+  {"start": 2.656, "duration": 0.387, "value": 0.5, "easing": "sine_in_out"},
+],
+"yPos": [
+  {"start": 0.345, "duration": 0.293, "value": 0.1, "easing": "sine_in_out"},
+  {"start": 0.643, "duration": 0.220, "value": 0.2, "easing": "sine_in_out"},
+  {"start": 0.868, "duration": 0.209, "value": 0.3, "easing": "sine_in_out"},
+  {"start": 1.072, "duration": 0.235, "value": 0.2, "easing": "sine_in_out"},
+  {"start": 1.297, "duration": 0.214, "value": 0.3, "easing": "sine_in_out"},
+  {"start": 1.501, "duration": 0.225, "value": 0.2, "easing": "sine_in_out"},
+  {"start": 1.720, "duration": 0.408, "value": 0.3, "easing": "sine_in_out"},
+  {"start": 2.133, "duration": 0.528, "value": 0.4, "easing": "sine_in_out"},
+  {"start": 2.656, "duration": 0.387, "value": 0.5, "easing": "sine_in_out"},
 ],
 "rotation": [
-  {"start": 3.048, "duration": 1.020, "value": 9.42477796077, "easing": "sine_out"}
+  {"start": 3.048, "duration": 1.020, "value": 12.5663706144, "easing": "sine_out"}
 ]
 }

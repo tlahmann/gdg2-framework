@@ -33,7 +33,7 @@ public abstract class AniImporter {
             JSONObject o = backgroundAnimations.getJSONObject(i);
             float start = o.getFloat("start");
             float duration = o.getFloat("duration");
-            int value = o.getInt("value");
+            float value = o.getFloat("value");
             String easingString = o.getString("easing");
             Easing easing = determineEasing(easingString);
 

@@ -47,7 +47,7 @@ public class GdGMain extends PApplet {
 
     public void initialize() {
         player.song().rewind();
-        child = new Triangle(-100, 500);
+        child = new Triangle(-0.1f, -0.1f);
     }
 
     @Override
