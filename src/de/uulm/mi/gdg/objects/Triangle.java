@@ -26,6 +26,7 @@ public class Triangle {
         c = GdGMain.canvas;
         this.xPos = xPos;
         this.yPos = yPos;
+        this.rotation = 0;
 
         shape = c.createShape(PConstants.TRIANGLE, -35, 25, 35, 25, 0, -35);
         shape.setFill(c.color(123, 255, 255));
@@ -38,9 +39,6 @@ public class Triangle {
         anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "yPos"));
         anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "rotation"));
         Collections.sort(anis);
-        for (CustomAnimation c : anis) {
-            System.out.println(c);
-        }
     }
 
     /**
@@ -55,8 +53,7 @@ public class Triangle {
         if (anis.size() == 0) {
             return;
         }
-        CustomAnimation a = anis.get(0);
-        if (time / 1000 < a.getStart()) {
+        if (time / 1000 < anis.get(0).getStart()) {
             return;
         }
 
@@ -73,7 +70,6 @@ public class Triangle {
      * Displays the shape on the stored static canvas object.
      */
     public void display() {
-//        System.out.println("Child is at pos: " + xPos + " :: " + yPos);
         c.pushMatrix();
         c.translate(c.width * xPos, c.height * yPos);
         c.rotate(rotation);
