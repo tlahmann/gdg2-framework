@@ -8,22 +8,25 @@ import de.uulm.mi.gdg.utils.CustomAnimation;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PShape;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Triangle {
-    private PApplet c;
+    private PApplet c = GdGMain.canvas;
     private float xPos;
     private float yPos;
     private float rotation;
     private PShape shape;
 
+    private ArrayList<Particle> particleList = new ArrayList<>();
+    private int particles = 0;
+
     private ArrayList<CustomAnimation> anis = new ArrayList<>();
     private ArrayList<Ani> activeAnis = new ArrayList<>();
 
     public Triangle(float xPos, float yPos) {
-        c = GdGMain.canvas;
         this.xPos = xPos;
         this.yPos = yPos;
         this.rotation = 0;
@@ -38,7 +41,9 @@ public class Triangle {
         anis = AniImporter.importAnimation(c, "./data/timing/child.json", "xPos");
         anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "yPos"));
         anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "rotation"));
+        anis.addAll(AniImporter.importAnimation(c, "./data/timing/child.json", "particles"));
         Collections.sort(anis);
+        activeAnis = new ArrayList<>();
     }
 
     /**
@@ -50,6 +55,12 @@ public class Triangle {
      * @param time the cue position of the song
      */
     public void update(float time) {
+        spawn();
+
+        for (Particle p : particleList) {
+            p.update();
+        }
+
         if (anis.size() == 0) {
             return;
         }
@@ -70,10 +81,26 @@ public class Triangle {
      * Displays the shape on the stored static canvas object.
      */
     public void display() {
+        for (Particle p : particleList) {
+            p.display();
+        }
         c.pushMatrix();
         c.translate(c.width * xPos, c.height * yPos);
         c.rotate(rotation);
         c.shape(shape);
         c.popMatrix();
+    }
+
+    /**
+     * If particles are to be created this adds them to the list of livin particles.
+     */
+    private void spawn() {
+        PVector position = new PVector(c.width * xPos, c.height * yPos);
+        float weight = 5.0f;
+        int color = c.color(48, 255, 48);
+
+        for (; particles > 0; particles--) {
+            particleList.add(new Particle(position, weight, color));
+        }
     }
 }

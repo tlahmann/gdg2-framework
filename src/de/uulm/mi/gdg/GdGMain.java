@@ -52,7 +52,7 @@ public class GdGMain extends PApplet {
 
     @Override
     public void draw() {
-        background(255);
+        background(0);
 
         child.update(player.song().position());
         child.display();
