@@ -12,14 +12,13 @@ import processing.core.PApplet;
 
 import static de.uulm.mi.gdg.utils.GdGConstants.AnimationStates.*;
 import static de.uulm.mi.gdg.utils.GdGConstants.DevelopmentStates.DEBUG;
-import static de.uulm.mi.gdg.utils.GdGConstants.DevelopmentStates.DEPLOY;
 import static de.uulm.mi.gdg.utils.GdGConstants.ExportStates.EXPORTING;
 import static de.uulm.mi.gdg.utils.GdGConstants.ExportStates.NOT_EXPORTING;
 
 public class GdGMain extends PApplet {
-    private static AnimationStates state = READY;
+    public static AnimationStates state = READY;
     private static ExportStates exportState = NOT_EXPORTING;
-    public static DevelopmentStates devState = DEBUG;
+    private static DevelopmentStates devState = DEBUG;
     public static PApplet canvas;
 
     private static GUI gui;
@@ -47,7 +46,7 @@ public class GdGMain extends PApplet {
 
     public void initialize() {
         player.song().rewind();
-        child = new Triangle(-0.1f, -0.1f);
+        child = new Triangle(0.1f, -0.1f);
     }
 
     @Override
@@ -98,11 +97,6 @@ public class GdGMain extends PApplet {
         player.song().play();
         gui.hide();
         exportState = EXPORTING;
-    }
-
-    public void toggleSomething() {
-        devState = devState == DEBUG ? DEPLOY : DEBUG;
-        System.out.println(devState);
     }
 
     public static void main(String[] args) {

@@ -6,6 +6,8 @@ import processing.core.PConstants;
 import processing.core.PShape;
 import processing.core.PVector;
 
+import static de.uulm.mi.gdg.utils.GdGConstants.AnimationStates.RUNNING;
+
 class Particle {
     private PApplet c = GdGMain.canvas;
     private PShape self;
@@ -29,6 +31,7 @@ class Particle {
      * Update a particles position according to its velocity
      */
     void update() {
+        if (GdGMain.state != RUNNING) return;
         velocity.mult(velocity.mag() > 0.05 ? 0.95f : 0f);
         // Location changes by velocity
         position.add(velocity);

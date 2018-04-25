@@ -13,6 +13,8 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static de.uulm.mi.gdg.utils.GdGConstants.AnimationStates.*;
+
 public class Triangle {
     private PApplet c = GdGMain.canvas;
     private float xPos;
@@ -55,6 +57,11 @@ public class Triangle {
      * @param time the cue position of the song
      */
     public void update(float time) {
+        // TODO: pause and resume animations
+        if (GdGMain.state != RUNNING) {
+            activeAnis.forEach(AniCore::pause);
+            return;
+        }
         spawn();
 
         for (Particle p : particleList) {

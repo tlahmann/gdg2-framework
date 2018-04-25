@@ -4,12 +4,11 @@ import controlP5.ControlFont;
 import controlP5.ControlP5;
 import de.uulm.mi.gdg.GdGMain;
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PFont;
-import processing.core.PShape;
 
-import static processing.core.PConstants.*;
 import static de.uulm.mi.gdg.utils.GdGConstants.Color.*;
+import static processing.core.PConstants.LEFT;
+import static processing.core.PConstants.TOP;
 
 public class GUI {
     private ControlP5 cp5;
@@ -22,19 +21,19 @@ public class GUI {
         PApplet c = GdGMain.canvas;
 
         // Do not change the font
-        PFont pfont = c.loadFont("font/Roboto-Regular-14.vlw"); // use true/false for smooth/no-smooth
+        PFont pfont = c.loadFont("./data/font/Roboto-Regular-14.vlw"); // use true/false for smooth/no-smooth
         ControlFont font = new ControlFont(pfont, 14);
 
         cp5 = new ControlP5(c);
         cp5.addButton("Play")
                 .setPosition(20, 125)
-                .setSize(getWidth("Play"), 36)
+                .setSize(150, 36)
                 .setFont(font)
                 .setColor(LIGHT_GREEN)
                 .plugTo(c, "playPause");
         cp5.addButton("Zurücksetzen")
                 .setPosition(20, 176)
-                .setSize(getWidth("Zurücksetzen"), 36)
+                .setSize(150, 36)
                 .setFont(font)
                 .setColor(BLUE_GREY)
                 .plugTo(c, "initialize");
@@ -58,36 +57,6 @@ public class GUI {
 
     public void show() {
         cp5.show();
-    }
-
-    public boolean isVisible() {
-        return cp5.isVisible();
-    }
-
-    private int getWidth(String text) {
-        int width = 0;
-        for (char c : text.toCharArray()) {
-            switch (Character.toLowerCase(c)) {
-                case 'm':
-                case 'w':
-                    width += 12;
-                    break;
-                case ' ':
-                    width += 4;
-                    break;
-                case 'l':
-                case 'r':
-                case 'b':
-                case 'd':
-                case 'o':
-                    width += 9;
-                    break;
-                default:
-                    width += 8;
-                    break;
-            }
-        }
-        return Math.max(width + 32, 64);
     }
 
     public void update(int time, float framerate) {
