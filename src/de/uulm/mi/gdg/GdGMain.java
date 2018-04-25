@@ -84,9 +84,11 @@ public class GdGMain extends PApplet {
         if (state == RUNNING) {
             player.song().play();
             gui.hide();
+            child.resume();
         } else {
             player.song().pause();
             gui.show();
+            child.pause();
         }
     }
 

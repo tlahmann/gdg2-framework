@@ -51,17 +51,10 @@ public class Triangle {
     /**
      * Takes a value of the position of the playhead from the equalizer. It is intended to start animations just when
      * the cue-position is greater than the start position of the animation.
-     * <p>A possible error could be that if the animation is not gone through linearly all animations that have a
-     * smaller start value than the cue they get all started simultaneously.</p>
      *
      * @param time the cue position of the song
      */
     public void update(float time) {
-        // TODO: pause and resume animations
-        if (GdGMain.state != RUNNING) {
-            activeAnis.forEach(AniCore::pause);
-            return;
-        }
         spawn();
 
         for (Particle p : particleList) {
@@ -82,6 +75,15 @@ public class Triangle {
 
         // Delete old and finished animations
         activeAnis.removeIf(AniCore::isEnded);
+    }
+
+    public void pause() {
+        activeAnis.forEach(AniCore::pause);
+    }
+
+    public void resume() {
+        activeAnis.removeIf(AniCore::isEnded);
+        activeAnis.forEach(AniCore::resume);
     }
 
     /**
