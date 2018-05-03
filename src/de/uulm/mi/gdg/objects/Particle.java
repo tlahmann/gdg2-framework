@@ -13,16 +13,17 @@ class Particle {
     private PShape self;
     private PVector position;
     private PVector velocity;
+    private float orientation;
 
     Particle(PVector position, float weight, int color) {
         // if we give the position in the constructor it gets called by reference
         this.position = position.copy();
 
-        float orientation = c.random(0, PConstants.TWO_PI);
-        float magnitude = c.random(20);
+        orientation = c.random(0, PConstants.TWO_PI);
+        float magnitude = c.random(15);
         velocity = new PVector(magnitude * PApplet.sin(orientation), magnitude * PApplet.cos(orientation));
 
-        self = c.createShape(PConstants.ELLIPSE, 0, 0, weight, weight);
+        self = c.createShape(PConstants.RECT, 0, 0, weight * 10, weight);
         self.setFill(color);
         self.setStroke(false);
     }
@@ -44,6 +45,7 @@ class Particle {
         // Locating and drawing the shape
         c.pushMatrix();
         c.translate(position.x, position.y);
+        c.rotate(orientation);
         c.shape(self);
         c.popMatrix();
     }

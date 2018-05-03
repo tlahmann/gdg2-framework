@@ -13,8 +13,6 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static de.uulm.mi.gdg.utils.GdGConstants.AnimationStates.*;
-
 public class Triangle {
     private PApplet c = GdGMain.canvas;
     private float xPos;
@@ -105,8 +103,8 @@ public class Triangle {
      */
     private void spawn() {
         PVector position = new PVector(c.width * xPos, c.height * yPos);
-        float weight = 5.0f;
-        int color = c.color(48, 255, 48);
+        float weight = 2.0f;
+        int color = c.color(48, 48, 48);
 
         for (; particles > 0; particles--) {
             particleList.add(new Particle(position, weight, color));
