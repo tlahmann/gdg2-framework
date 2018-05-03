@@ -1,6 +1,7 @@
 package de.uulm.mi.gdg;
 
 import de.looksgood.ani.Ani;
+import de.uulm.mi.gdg.objects.Hexagon;
 import de.uulm.mi.gdg.objects.Triangle;
 import de.uulm.mi.gdg.utils.AniExporter;
 import de.uulm.mi.gdg.utils.GUI;
@@ -27,6 +28,7 @@ public class GdGMain extends PApplet {
     private AniExporter ae;
 
     private Triangle child;
+    private Hexagon parent;
 
     public void settings() {
         setSize(1240, 720);
@@ -47,14 +49,18 @@ public class GdGMain extends PApplet {
     public void initialize() {
         player.song().rewind();
         child = new Triangle(0.1f, -0.1f);
+        parent = new Hexagon(1.2f, 0.2f);
     }
 
     @Override
     public void draw() {
         background(0);
 
-        child.update(player.song().position());
+        child.update(player.song().position(), parent.getPosition());
         child.display();
+
+        parent.update(player.song().position());
+        parent.display();
 
         if (exportState == EXPORTING) {
             ae.setSoundTime(player.song().position());
@@ -85,10 +91,12 @@ public class GdGMain extends PApplet {
             player.song().play();
             gui.hide();
             child.resume();
+            parent.resume();
         } else {
             player.song().pause();
             gui.show();
             child.pause();
+            parent.pause();
         }
     }
 
