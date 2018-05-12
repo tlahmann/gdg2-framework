@@ -3,6 +3,9 @@ package de.uulm.mi.gdg.utils;
 import controlP5.CColor;
 import de.uulm.mi.gdg.GdGMain;
 
+/**
+ * Constants class holding enumerations for the game state, development state as well as colors used in the GUI
+ */
 public class GdGConstants {
     public enum AnimationStates {
         READY, RUNNING, PAUSED
@@ -12,6 +15,9 @@ public class GdGConstants {
         DEBUG, DEPLOY
     }
 
+    /**
+     * Colors usable in the gui. These are the colors used in the material design by google.
+     */
     public interface Color {
         CColor RED = new CColor(GdGMain.canvas.color(211, 47, 47),
                 GdGMain.canvas.color(244, 67, 54),

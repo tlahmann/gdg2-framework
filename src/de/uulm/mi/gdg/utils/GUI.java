@@ -10,6 +10,12 @@ import static de.uulm.mi.gdg.utils.GdGConstants.Color.*;
 import static processing.core.PConstants.LEFT;
 import static processing.core.PConstants.TOP;
 
+/**
+ * Gui class to display while the animation is either initialized, paused or has finished.
+ *
+ * @author Tobias Lahmann
+ * Date: 18.04.2018
+ */
 public class GUI {
     private ControlP5 cp5;
 
@@ -17,6 +23,9 @@ public class GUI {
     private float fps = 0;
     private float frameRate = 0;
 
+    /**
+     * The constructor creates all needed buttons and stores them in the <pre>controlP5.ControlP5</pre> cp5 variable
+     */
     public GUI() {
         PApplet c = GdGMain.canvas;
 
@@ -73,23 +82,43 @@ public class GUI {
                 .plugTo(c, "exit");
     }
 
+    /**
+     * if the gui is currently shown
+     *
+     * @return is visible
+     */
     public boolean isVisible() {
         return cp5.isVisible();
     }
 
+    /**
+     * hides the gui
+     */
     public void hide() {
         cp5.hide();
     }
 
+    /**
+     * displays the gui
+     */
     public void show() {
         cp5.show();
     }
 
+    /**
+     * Update method for the debugging information
+     *
+     * @param time      current time of the song
+     * @param framerate current framerate
+     */
     public void update(int time, float framerate) {
         now = time;
         frameRate = framerate;
     }
 
+    /**
+     * Display method to draw debugging information on the screen
+     */
     public void display() {
         int sec = now / 1000, ms = now % 1000;
         float smoothing = 0.95f;

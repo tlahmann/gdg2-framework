@@ -14,11 +14,14 @@ import static de.uulm.mi.gdg.utils.GdGConstants.AnimationStates.*;
 import static de.uulm.mi.gdg.utils.GdGConstants.DevelopmentStates.DEBUG;
 import static de.uulm.mi.gdg.utils.GdGConstants.DevelopmentStates.DEPLOY;
 
+/**
+ * Main class for the processing application. This class is the main PApplet and will act as controller.
+ */
 public class GdGMain extends PApplet {
     private final String SONG = "./data/6_i_fazil say, patricia kopatchinskaja — bartók - rumänische volkstänze sz. 56 - 2. allegro (briul).mp3";
     private final String COLORS = "./data/colorbrewer.json";
     public static AnimationStates state = READY;
-    private static DevelopmentStates devState = DEBUG;
+    private static DevelopmentStates devState = DEPLOY; // Development state, can eitehr be DEBUG or DEPLOY
     public static PApplet canvas;
 
     private static GUI gui;
@@ -31,12 +34,13 @@ public class GdGMain extends PApplet {
     private int parentColor;
     private int backgroundColor;
 
+    @Override
     public void settings() {
         if (devState == DEBUG) {
             setSize(1240, 720);
         } else {
             setSize(1920, 1080);
-            fullScreen(1);
+            fullScreen(2);
         }
     }
 
@@ -54,6 +58,10 @@ public class GdGMain extends PApplet {
         initialize();
     }
 
+    /**
+     * Init method. Called when the animation is loaded or when the reset button is pressed.
+     * Do not change the visibility, because the gui relies on it being 'public'
+     */
     public void initialize() {
         player.song().rewind();
         player.song().pause();
@@ -71,6 +79,10 @@ public class GdGMain extends PApplet {
 
         parent.update(player.song().position());
         parent.display();
+
+        // =====
+        // Utility procedure, do not change unless you need to. Put all your drawing logic above
+        // =====
 
         /* At the end of the animation the gui should be displayed. For this we'll check if the song is just about half
            a second away from the end*/
@@ -91,6 +103,10 @@ public class GdGMain extends PApplet {
         }
     }
 
+    /**
+     * Overwritten method called when a keyboard key is pressed. The key that got pressed is stored in the <pre>key</pre>
+     * variable within the PApplet
+     */
     @Override
     public void keyPressed() {
         switch (Character.toLowerCase(key)) {
@@ -118,6 +134,10 @@ public class GdGMain extends PApplet {
         super.keyPressed();
     }
 
+    /**
+     * Play pause method changes the running state, shows/hides the gui and either resumes or pauses all animations.
+     * Do not change the visibility, because the gui relies on it being 'public'
+     */
     public void playPause() {
         state = state == RUNNING ? PAUSED : RUNNING;
         if (state == RUNNING) {
@@ -133,6 +153,10 @@ public class GdGMain extends PApplet {
         }
     }
 
+    /**
+     * Load the desired color scheme from an external file.
+     * Do not change the visibility, because the gui relies on it being 'public'
+     */
     public void loadColors(int colorValue) {
         JSONArray file = this.loadJSONArray(COLORS);
         JSONArray color = file.getJSONObject(colorValue).getJSONArray("colors");
@@ -143,6 +167,9 @@ public class GdGMain extends PApplet {
         initialize();
     }
 
+    /**
+     * Calculates an integer color value used by processing from a string in the format 'rgb(0,255,128)' or similar
+     */
     private int rgbStringToColor(String rgbString) {
         String a = rgbString.split("[(]")[1].split("[)]")[0];
         String[] rgb = a.split(",");
@@ -151,6 +178,11 @@ public class GdGMain extends PApplet {
                 Integer.toString(Integer.parseInt(rgb[2]), 16)));
     }
 
+    /**
+     * Main entry point for our animation
+     *
+     * @param args program arguments
+     */
     public static void main(String[] args) {
         PApplet.main(new String[]{GdGMain.class.getName()});
     }
