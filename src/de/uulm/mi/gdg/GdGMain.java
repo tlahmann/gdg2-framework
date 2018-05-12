@@ -1,4 +1,4 @@
-package de.uulm.mi.gdg;
+﻿package de.uulm.mi.gdg;
 
 import de.looksgood.ani.Ani;
 import de.uulm.mi.gdg.objects.Hexagon;
@@ -18,7 +18,7 @@ import static de.uulm.mi.gdg.utils.GdGConstants.DevelopmentStates.DEPLOY;
  * Main class for the processing application. This class is the main PApplet and will act as controller.
  */
 public class GdGMain extends PApplet {
-    private final String SONG = "./data/6_i_fazil say, patricia kopatchinskaja — bartók - rumänische volkstänze sz. 56 - 2. allegro (briul).mp3";
+    private final String SONG = "./data/6_i_fazil say, patricia kopatchinskaja - bartók - rumänische volkstänze sz. 56 - 2. allegro (briul).mp3";
     private final String COLORS = "./data/colorbrewer.json";
     public static AnimationStates state = READY;
     private static DevelopmentStates devState = DEPLOY; // Development state, can eitehr be DEBUG or DEPLOY
@@ -40,7 +40,7 @@ public class GdGMain extends PApplet {
             setSize(1240, 720);
         } else {
             setSize(1920, 1080);
-            fullScreen(2);
+            fullScreen(1);
         }
     }
 

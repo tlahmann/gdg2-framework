@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/gdg2-framework"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="Ani" value="project"/>
+		<level name="minim" value="project"/>
+		<level name="controlP5" value="project"/>
+		<level name="core" value="project"/>
+		<level name="VideoExport" value="project"/>
+	</levels>
+</component>
