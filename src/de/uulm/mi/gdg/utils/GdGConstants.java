@@ -8,10 +8,6 @@ public class GdGConstants {
         READY, RUNNING, PAUSED
     }
 
-    public enum ExportStates {
-        EXPORTING, NOT_EXPORTING
-    }
-
     public enum DevelopmentStates {
         DEBUG, DEPLOY
     }

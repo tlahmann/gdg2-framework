@@ -26,11 +26,11 @@ public abstract class AniImporter {
      */
     public static ArrayList<CustomAnimation> importAnimation(PApplet importer, String filePath, String param) {
         JSONObject file = importer.loadJSONObject(filePath);
-        JSONArray backgroundAnimations = file.getJSONArray(param);
+        JSONArray animations = file.getJSONArray(param);
 
         ArrayList<CustomAnimation> anis = new ArrayList<>();
-        for (int i = 0; i < backgroundAnimations.size(); i++) {
-            JSONObject o = backgroundAnimations.getJSONObject(i);
+        for (int i = 0; i < animations.size(); i++) {
+            JSONObject o = animations.getJSONObject(i);
             float start = o.getFloat("start");
             float duration = o.getFloat("duration");
             float value = o.getFloat("value");

@@ -26,13 +26,13 @@ public class Triangle {
     private ArrayList<CustomAnimation> anis = new ArrayList<>();
     private ArrayList<Ani> activeAnis = new ArrayList<>();
 
-    public Triangle(float xPos, float yPos) {
+    public Triangle(float xPos, float yPos, int color) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.rotation = 0;
 
         shape = c.createShape(PConstants.TRIANGLE, -35, 25, 35, 25, 0, -35);
-        shape.setFill(c.color(123, 255, 255));
+        shape.setFill(color);
         shape.setStroke(false);
         importAnimation();
     }

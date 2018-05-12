@@ -37,18 +37,44 @@ public class GUI {
                 .setFont(font)
                 .setColor(BLUE_GREY)
                 .plugTo(c, "initialize");
+        cp5.addButton("Farben 0")
+                .setPosition(c.width - 175, 125)
+                .setSize(150, 36)
+                .setFont(font)
+                .setColor(GREY)
+                .setValue(0)
+                .plugTo(c, "loadColors");
+        cp5.addButton("Farben 1")
+                .setPosition(c.width - 175, 176)
+                .setSize(150, 36)
+                .setFont(font)
+                .setColor(GREY)
+                .setValue(1)
+                .plugTo(c, "loadColors");
+        cp5.addButton("Farben 2")
+                .setPosition(c.width - 175, 227)
+                .setSize(150, 36)
+                .setFont(font)
+                .setColor(GREY)
+                .setValue(2)
+                .plugTo(c, "loadColors");
+        cp5.addButton("Farben 3")
+                .setPosition(c.width - 175, 278)
+                .setSize(150, 36)
+                .setFont(font)
+                .setColor(GREY)
+                .setValue(3)
+                .plugTo(c, "loadColors");
         cp5.addButton("Exit")
                 .setPosition(25, c.height - 73)
                 .setSize(150, 48)
                 .setFont(font)
                 .setColor(AMBER)
                 .plugTo(c, "exit");
-        cp5.addButton("Start Export")
-                .setPosition(c.width - 175, c.height - 73)
-                .setSize(150, 48)
-                .setFont(font)
-                .setColor(RED)
-                .plugTo(c, "startExporting");
+    }
+
+    public boolean isVisible() {
+        return cp5.isVisible();
     }
 
     public void hide() {

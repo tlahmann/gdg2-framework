@@ -1,13 +1,11 @@
 package de.uulm.mi.gdg.objects;
 
-import com.sun.jna.platform.win32.WinBase;
 import de.looksgood.ani.Ani;
 import de.looksgood.ani.AniCore;
 import de.uulm.mi.gdg.GdGMain;
 import de.uulm.mi.gdg.utils.AniImporter;
 import de.uulm.mi.gdg.utils.CustomAnimation;
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PShape;
 import processing.core.PVector;
 
@@ -26,7 +24,7 @@ public class Hexagon {
     private ArrayList<CustomAnimation> anis = new ArrayList<>();
     private ArrayList<Ani> activeAnis = new ArrayList<>();
 
-    public Hexagon(float xPos, float yPos) {
+    public Hexagon(float xPos, float yPos, int color) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.rotation = PI / 2;
@@ -36,7 +34,7 @@ public class Hexagon {
         shape.beginShape();
 
         shape.noStroke();
-        shape.fill(c.color(73, 153, 113));
+        shape.fill(color);
 
         for (float a = 0; a < TWO_PI; a += PI / 3) {
             shape.vertex(PApplet.cos(a) * radius / 2, PApplet.sin(a) * radius / 2);
